@@ -1,0 +1,10 @@
+{
+  "name": "pern-todo-list",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Kyle McKell <46072760+KyleMcKell@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
