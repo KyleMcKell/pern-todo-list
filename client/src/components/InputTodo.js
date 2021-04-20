@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Button,
 	FormControl,
@@ -8,16 +8,39 @@ import {
 } from "@material-ui/core";
 
 export default function InputTodo() {
+	const [description, setDescription] = useState("hi");
+
+	const handleChange = (e) => {
+		setDescription(e.target.value);
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const body = { description };
+			const res = await fetch("http://localhost:5000/todos", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(body),
+			});
+			console.log(res);
+		} catch (err) {
+			console.error(err.message);
+		}
+	};
+
 	return (
-		<form>
+		<form onSubmit={handleSubmit}>
 			<FormControl>
-				<InputLabel htmlFor="todo-input">Add a Todo</InputLabel>
-				<Input id="todo-input" />
-				<FormHelperText id="todo-helper-text">Track a New Todo!</FormHelperText>
+				<InputLabel htmlFor="description">Input Todo</InputLabel>
+				<Input id="description" value={description} onChange={handleChange} />
+				<FormHelperText id="description-helper-text">
+					What Would You Like To Do?
+				</FormHelperText>
 			</FormControl>
 			<FormControl>
-				<Button variant="contained" color="primary">
-					Add
+				<Button variant="contained" color="primary" type="submit">
+					Add Todo
 				</Button>
 			</FormControl>
 		</form>
