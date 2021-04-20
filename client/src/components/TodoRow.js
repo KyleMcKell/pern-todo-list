@@ -3,12 +3,12 @@ import { TableRow, TableCell, Button } from "@material-ui/core";
 import axios from "axios";
 import TodoEdit from "./TodoEdit";
 
-export default function TodoRow({ todo, key }) {
+export default function TodoRow({ todo, setRefetchQuery }) {
 	const handleDelete = async (todo) => {
 		try {
+			setRefetchQuery(true);
 			const { todo_id: id } = todo;
 			await axios.delete(`http://localhost:5000/todos/${id}`);
-			window.location = "/";
 		} catch (err) {
 			console.error(err.message);
 		}
@@ -16,17 +16,17 @@ export default function TodoRow({ todo, key }) {
 
 	const handleEdit = async (todo, description) => {
 		try {
+			setRefetchQuery(true);
 			const { todo_id: id } = todo;
 			const body = { description };
 			axios.put(`http://localhost:5000/todos/${id}`, body);
-			window.location = "/";
 		} catch (err) {
 			console.error(err.message);
 		}
 	};
 
 	return (
-		<TableRow key={key}>
+		<TableRow>
 			<TableCell component="th" scope="row">
 				{todo.description}
 			</TableCell>

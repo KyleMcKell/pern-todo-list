@@ -1,8 +1,9 @@
 import { Grid, makeStyles } from "@material-ui/core";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import InputTodo from "./components/InputTodo";
 import ListTodos from "./components/TodoList";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -13,6 +14,26 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
 	const classes = useStyles();
+	const [refetchQuery, setRefetchQuery] = useState(true);
+	const [todos, setTodos] = useState([]);
+
+	const fetchTodos = async () => {
+		try {
+			setRefetchQuery(false);
+			const res = await axios.get("http://localhost:5000/todos");
+			console.log(res.data);
+			setTodos(res.data);
+		} catch (err) {
+			console.error(err.message);
+			setRefetchQuery(false);
+		}
+	};
+
+	useEffect(() => {
+		if (refetchQuery) {
+			fetchTodos();
+		}
+	}, [refetchQuery]);
 
 	return (
 		<Grid container direction="column" className={classes.root}>
@@ -20,10 +41,10 @@ function App() {
 				<Header />
 			</Grid>
 			<Grid item>
-				<InputTodo />
+				<InputTodo setRefetchQuery={setRefetchQuery} />
 			</Grid>
 			<Grid item>
-				<ListTodos />
+				<ListTodos todos={todos} setRefetchQuery={setRefetchQuery} />
 			</Grid>
 		</Grid>
 	);

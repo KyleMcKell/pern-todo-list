@@ -8,9 +8,8 @@ import {
 	makeStyles,
 	TableBody,
 } from "@material-ui/core";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { v4 as uuid } from "uuid";
-import axios from "axios";
 import TodoRow from "./TodoRow";
 
 const useStyles = makeStyles({
@@ -22,22 +21,8 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function ListTodos() {
+export default function ListTodos({ setRefetchQuery, todos }) {
 	const classes = useStyles();
-	const [todos, setTodos] = useState([]);
-
-	const fetchTodos = async () => {
-		try {
-			const res = await axios.get("http://localhost:5000/todos");
-			setTodos(res.data);
-		} catch (err) {
-			console.error(err.message);
-		}
-	};
-
-	useEffect(() => {
-		fetchTodos();
-	}, []);
 
 	return (
 		<TableContainer component={Paper}>
@@ -51,7 +36,11 @@ export default function ListTodos() {
 				</TableHead>
 				<TableBody>
 					{todos.map((todo) => (
-						<TodoRow todo={todo} key={uuid()} />
+						<TodoRow
+							setRefetchQuery={setRefetchQuery}
+							todo={todo}
+							key={uuid()}
+						/>
 					))}
 				</TableBody>
 			</Table>

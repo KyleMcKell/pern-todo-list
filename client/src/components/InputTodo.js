@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 
-export default function InputTodo() {
+export default function InputTodo({ setRefetchQuery }) {
 	const [description, setDescription] = useState("");
 
 	const handleChange = (e) => {
@@ -20,7 +20,7 @@ export default function InputTodo() {
 		try {
 			const body = { description };
 			await axios.post("http://localhost:5000/todos", body);
-			window.location = "/";
+			setRefetchQuery(true);
 		} catch (err) {
 			console.error(err.message);
 		}
