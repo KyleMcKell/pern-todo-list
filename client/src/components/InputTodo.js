@@ -18,9 +18,12 @@ export default function InputTodo({ setRefetchQuery }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const body = { description };
-			await axios.post("http://localhost:5000/todos", body);
-			setRefetchQuery(true);
+			if (description) {
+				const body = { description };
+				await axios.post("http://localhost:5000/todos", body);
+				setRefetchQuery(true);
+				setDescription("");
+			}
 		} catch (err) {
 			console.error(err.message);
 		}
