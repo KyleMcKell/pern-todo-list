@@ -1,5 +1,12 @@
 # PERN TODO LIST
 
-This is a super simple project using a backend of Node, Express and PostgreSQL and a frontend using React and Material UI to learn how to create full stack applications with the PERN stack.
+Super simple PERN stack project. 
+Backend of Node, Express and PostgreSQL. 
+Frontend using React and Material UI.
 
-This project is for educational purposes
+Based on a YouTube tutorial for the PERN stack
+Tutorial can be found here: https://www.youtube.com/watch?v=ldYcgPKEZC8
+
+Project differs from the tutorial though the usage of Material UI and creating a better user experience through not reloading the page on each CRUD operation. 
+
+This project was for educational purposes to become familiar with full stack development with React.
