@@ -19,7 +19,7 @@ export default function InputTodo() {
 		e.preventDefault();
 		try {
 			const body = { description };
-			const res = await axios.post("http://localhost:5000/todos", body);
+			await axios.post("http://localhost:5000/todos", body);
 			window.location = "/";
 		} catch (err) {
 			console.error(err.message);
