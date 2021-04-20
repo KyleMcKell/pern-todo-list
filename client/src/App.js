@@ -2,7 +2,7 @@ import { Grid, makeStyles } from "@material-ui/core";
 import React from "react";
 import Header from "./components/Header";
 import InputTodo from "./components/InputTodo";
-import ListTodos from "./components/ListTodos";
+import ListTodos from "./components/TodoList";
 
 const useStyles = makeStyles((theme) => ({
 	root: {

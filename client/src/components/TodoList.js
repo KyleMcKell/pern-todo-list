@@ -25,7 +25,7 @@ export default function ListTodos() {
 	const classes = useStyles();
 	const [todos, setTodos] = useState([]);
 
-	const getTodos = async () => {
+	const fetchTodos = async () => {
 		try {
 			const res = await fetch("http://localhost:5000/todos");
 			const data = await res.json();
@@ -36,7 +36,7 @@ export default function ListTodos() {
 	};
 
 	useEffect(() => {
-		getTodos();
+		fetchTodos();
 	}, []);
 
 	return (
