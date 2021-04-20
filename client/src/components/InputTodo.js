@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 
 export default function InputTodo() {
-	const [description, setDescription] = useState("hi");
+	const [description, setDescription] = useState("");
 
 	const handleChange = (e) => {
 		setDescription(e.target.value);
