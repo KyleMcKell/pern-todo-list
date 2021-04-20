@@ -22,7 +22,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TodoEdit({ handleEdit, todo }) {
 	const [isOpen, setIsOpen] = useState(false);
-	const [updatedDescription, setUpdatedDescription] = useState("");
+	const [updatedDescription, setUpdatedDescription] = useState(
+		todo.description
+	);
 	const classes = useStyles();
 
 	const handleOpen = () => {
@@ -47,7 +49,7 @@ export default function TodoEdit({ handleEdit, todo }) {
 			<form onSubmit={handleSubmit}>
 				<FormControl>
 					<InputLabel htmlFor="updated-description">
-						{todo.description}
+						Change To Do Text
 					</InputLabel>
 					<Input
 						id="updated-description"
@@ -55,7 +57,7 @@ export default function TodoEdit({ handleEdit, todo }) {
 						onChange={handleChange}
 					/>
 					<FormHelperText id="updated-description-helper-text">
-						Fix Up Your Todo!
+						Changing "{todo.description}"
 					</FormHelperText>
 				</FormControl>
 				<br />
