@@ -23,10 +23,21 @@ const useStyles = makeStyles({
 
 export default function ListTodos() {
 	const classes = useStyles();
-	const [todos, setTodos] = useState([
-		{ description: "Hi there" },
-		{ description: "second one" },
-	]);
+	const [todos, setTodos] = useState([]);
+
+	const getTodos = async () => {
+		try {
+			const res = await fetch("http://localhost:5000/todos");
+			const data = await res.json();
+			setTodos(data);
+		} catch (err) {
+			console.error(err.message);
+		}
+	};
+
+	useEffect(() => {
+		getTodos();
+	}, []);
 
 	return (
 		<TableContainer component={Paper}>
@@ -34,6 +45,8 @@ export default function ListTodos() {
 				<TableHead>
 					<TableRow>
 						<TableCell className={classes.descriptionCell}>Todos</TableCell>
+						<TableCell></TableCell>
+						<TableCell></TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
