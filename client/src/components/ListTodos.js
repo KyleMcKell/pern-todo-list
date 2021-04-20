@@ -39,7 +39,9 @@ export default function ListTodos() {
 				<TableBody>
 					{todos.map((todo) => (
 						<TableRow key={uuid()}>
-							<TableCell>{todo.description}</TableCell>
+							<TableCell component="th" scope="row">
+								{todo.description}
+							</TableCell>
 							<TableCell>
 								<Button variant="outlined">Edit</Button>
 							</TableCell>
