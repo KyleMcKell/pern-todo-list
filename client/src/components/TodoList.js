@@ -12,6 +12,7 @@ import {
 import React, { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
+import TodoRow from "./TodoRow";
 
 const useStyles = makeStyles({
 	table: {
@@ -35,25 +36,6 @@ export default function ListTodos() {
 		}
 	};
 
-	const handleEdit = async (todo) => {
-		try {
-			const { todo_id: id } = todo;
-			console.log(id);
-		} catch (err) {
-			console.error(err.message);
-		}
-	};
-
-	const handleDelete = async (todo) => {
-		try {
-			const { todo_id: id } = todo;
-			const res = await axios.delete(`http://localhost:5000/todos/${id}`);
-			window.location = "/";
-		} catch (err) {
-			console.error(err.message);
-		}
-	};
-
 	useEffect(() => {
 		fetchTodos();
 	}, []);
@@ -70,25 +52,7 @@ export default function ListTodos() {
 				</TableHead>
 				<TableBody>
 					{todos.map((todo) => (
-						<TableRow key={uuid()}>
-							<TableCell component="th" scope="row">
-								{todo.description}
-							</TableCell>
-							<TableCell>
-								<Button variant="outlined" onClick={() => handleEdit(todo)}>
-									Edit
-								</Button>
-							</TableCell>
-							<TableCell>
-								<Button
-									variant="outlined"
-									color="secondary"
-									onClick={() => handleDelete(todo)}
-								>
-									Delete
-								</Button>
-							</TableCell>
-						</TableRow>
+						<TodoRow todo={todo} key={uuid()} />
 					))}
 				</TableBody>
 			</Table>
