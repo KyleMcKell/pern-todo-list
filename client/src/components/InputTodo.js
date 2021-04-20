@@ -5,11 +5,24 @@ import {
 	FormHelperText,
 	Input,
 	InputLabel,
+	makeStyles,
 } from "@material-ui/core";
 import axios from "axios";
 
+const useStyles = makeStyles(() => ({
+	inputForm: {
+		marginBottom: "3rem",
+		textAlign: "center",
+		width: "100%",
+	},
+	inputControl: {
+		width: "20rem",
+	},
+}));
+
 export default function InputTodo({ setRefetchQuery }) {
 	const [description, setDescription] = useState("");
+	const classes = useStyles();
 
 	const handleChange = (e) => {
 		setDescription(e.target.value);
@@ -30,10 +43,15 @@ export default function InputTodo({ setRefetchQuery }) {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<FormControl>
+		<form onSubmit={handleSubmit} className={classes.inputForm}>
+			<FormControl className={classes.inputControl}>
 				<InputLabel htmlFor="description">Input Todo</InputLabel>
-				<Input id="description" value={description} onChange={handleChange} />
+				<Input
+					id="description"
+					value={description}
+					onChange={handleChange}
+					fullWidth={true}
+				/>
 				<FormHelperText id="description-helper-text">
 					What Would You Like To Do?
 				</FormHelperText>

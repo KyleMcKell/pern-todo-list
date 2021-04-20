@@ -25,7 +25,7 @@ export default function ListTodos({ setRefetchQuery, todos }) {
 	const classes = useStyles();
 
 	return (
-		<TableContainer component={Paper}>
+		<TableContainer component={Paper} elevation={2}>
 			<Table className={classes.table}>
 				<TableHead>
 					<TableRow>

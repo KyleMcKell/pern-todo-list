@@ -1,10 +1,20 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+	header: {
+		margin: "3rem",
+	},
+}));
 
 export default function Header() {
+	const classes = useStyles();
+
 	return (
 		<>
-			<Typography variant="h2">Pern Todo List</Typography>
+			<Typography className={classes.header} variant="h2">
+				Pern Todo List
+			</Typography>
 		</>
 	);
 }
