@@ -17,8 +17,8 @@ app.post("/todos", async (req, res) => {
 			[description]
 		);
 		res.json(newTodo.rows[0]);
-	} catch (e) {
-		console.error(e.message);
+	} catch (err) {
+		console.error(err.message);
 	}
 });
 
@@ -27,8 +27,8 @@ app.get("/todos", async (req, res) => {
 	try {
 		const allTodos = await pool.query("SELECT * FROM todo");
 		res.json(allTodos.rows);
-	} catch (e) {
-		console.error(e.message);
+	} catch (err) {
+		console.error(err.message);
 	}
 });
 
@@ -40,8 +40,8 @@ app.get("/todos/:id", async (req, res) => {
 			id,
 		]);
 		res.json(todo.rows[0]);
-	} catch (e) {
-		console.error(e.message);
+	} catch (err) {
+		console.error(err.message);
 	}
 });
 
@@ -55,8 +55,8 @@ app.put("/todos/:id", async (req, res) => {
 			[description, id]
 		);
 		res.json(`Todo with id ${id} was updated to '${description}'`);
-	} catch (e) {
-		console.error(e.message);
+	} catch (err) {
+		console.error(err.message);
 	}
 });
 
@@ -68,8 +68,8 @@ app.delete("/todos/:id", async (req, res) => {
 			id,
 		]);
 		res.json(`Todo ${id} was deleted`);
-	} catch (e) {
-		console.error(e.message);
+	} catch (err) {
+		console.error(err.message);
 	}
 });
 
