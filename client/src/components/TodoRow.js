@@ -6,9 +6,9 @@ import TodoEdit from "./TodoEdit";
 export default function TodoRow({ todo, setRefetchQuery }) {
 	const handleDelete = async (todo) => {
 		try {
-			setRefetchQuery(true);
 			const { todo_id: id } = todo;
 			await axios.delete(`http://localhost:5000/todos/${id}`);
+			setRefetchQuery(true);
 		} catch (err) {
 			console.error(err.message);
 		}
@@ -16,10 +16,12 @@ export default function TodoRow({ todo, setRefetchQuery }) {
 
 	const handleEdit = async (todo, description) => {
 		try {
-			setRefetchQuery(true);
-			const { todo_id: id } = todo;
-			const body = { description };
-			axios.put(`http://localhost:5000/todos/${id}`, body);
+			if (description) {
+				const { todo_id: id } = todo;
+				const body = { description };
+				axios.put(`http://localhost:5000/todos/${id}`, body);
+				setRefetchQuery(true);
+			}
 		} catch (err) {
 			console.error(err.message);
 		}
