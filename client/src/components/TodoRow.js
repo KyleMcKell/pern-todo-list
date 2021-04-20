@@ -14,10 +14,12 @@ export default function TodoRow({ todo, key }) {
 		}
 	};
 
-	const handleEdit = async (todo) => {
+	const handleEdit = async (todo, description) => {
 		try {
 			const { todo_id: id } = todo;
-			console.log(id);
+			const body = { description };
+			axios.put(`http://localhost:5000/todos/${id}`, body);
+			window.location = "/";
 		} catch (err) {
 			console.error(err.message);
 		}

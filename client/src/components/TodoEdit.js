@@ -6,11 +6,24 @@ import {
 	InputLabel,
 	Input,
 	FormHelperText,
+	Paper,
+	makeStyles,
 } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+	updateModal: {
+		padding: "2rem",
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%);",
+	},
+}));
 
 export default function TodoEdit({ handleEdit, todo }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [updatedDescription, setUpdatedDescription] = useState("");
+	const classes = useStyles();
 
 	const handleOpen = () => {
 		setIsOpen(true);
@@ -22,6 +35,7 @@ export default function TodoEdit({ handleEdit, todo }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		handleEdit(todo, updatedDescription);
 	};
 
 	const handleChange = (e) => {
@@ -29,10 +43,12 @@ export default function TodoEdit({ handleEdit, todo }) {
 	};
 
 	const modalBody = (
-		<div>
+		<Paper elevation={3} className={classes.updateModal}>
 			<form onSubmit={handleSubmit}>
 				<FormControl>
-					<InputLabel htmlFor="updated-description">Update Todo</InputLabel>
+					<InputLabel htmlFor="updated-description">
+						{todo.description}
+					</InputLabel>
 					<Input
 						id="updated-description"
 						value={updatedDescription}
@@ -42,13 +58,14 @@ export default function TodoEdit({ handleEdit, todo }) {
 						Fix Up Your Todo!
 					</FormHelperText>
 				</FormControl>
+				<br />
 				<FormControl>
 					<Button variant="contained" color="primary" type="submit">
 						Update
 					</Button>
 				</FormControl>
 			</form>
-		</div>
+		</Paper>
 	);
 
 	return (
