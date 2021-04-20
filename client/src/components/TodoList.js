@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
+import axios from "axios";
 
 const useStyles = makeStyles({
 	table: {
@@ -27,9 +28,17 @@ export default function ListTodos() {
 
 	const fetchTodos = async () => {
 		try {
-			const res = await fetch("http://localhost:5000/todos");
-			const data = await res.json();
-			setTodos(data);
+			const res = await axios.get("http://localhost:5000/todos");
+			setTodos(res.data);
+		} catch (err) {
+			console.error(err.message);
+		}
+	};
+
+	const handleDelete = async (todo) => {
+		try {
+			const { todo_id: id } = todo;
+			const res = await axios.delete(`http://localhost:5000/todos/${id}`);
 		} catch (err) {
 			console.error(err.message);
 		}
@@ -59,7 +68,11 @@ export default function ListTodos() {
 								<Button variant="outlined">Edit</Button>
 							</TableCell>
 							<TableCell>
-								<Button variant="outlined" color="secondary">
+								<Button
+									variant="outlined"
+									color="secondary"
+									onClick={() => handleDelete(todo)}
+								>
 									Delete
 								</Button>
 							</TableCell>
