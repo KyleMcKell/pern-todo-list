@@ -13,7 +13,6 @@ const useStyles = makeStyles(() => ({
 	inputForm: {
 		marginBottom: "3rem",
 		textAlign: "center",
-		width: "100%",
 	},
 	inputControl: {
 		width: "20rem",
